@@ -1,0 +1,16 @@
+name "gyro_compensated"
+
+import_types_from "base"
+import_types_from "gyro_compensatedTypes.hpp"
+
+task_context "Task" do
+    needs_configuration
+    property("latitude","double").doc("latitude of the location in degrees")
+    input_port("imu", "/base/samples/RigidBodyState").doc("Input from IMU attitude")
+    input_port("rotation","/base/samples/IMUSensors").doc("Gyro input (angular velocity), only rotation in Z axis is used")
+
+    output_port("orientation_samples", "/base/samples/RigidBodyState").doc("Gyro output compensated for pitch/roll using the IMU")
+
+    port_driven
+end
+
